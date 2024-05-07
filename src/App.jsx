@@ -16,7 +16,7 @@ function App() {
 	useEffect(() => {
 		filterHandler();
 		saveLocal();
-	}, [todos, status, inputText]);
+	}, [todos, status]);
 
 	//handler functions
 	const saveLocal = () =>
