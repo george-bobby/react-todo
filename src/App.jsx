@@ -19,15 +19,24 @@ function App() {
 	}, [todos, status]);
 
 	//handler functions
-	const saveLocal = () =>
-		localStorage.setItem("todos", JSON.stringify(todos));
+	const saveLocal = () => {
+		try {
+			localStorage.setItem("todos", JSON.stringify(todos));
+		} catch (error) {
+			console.error("Error saving todos to local storage: ", error);
+		}
+	};
 
 	const getLocal = () => {
-		if (localStorage.getItem("todos") === null)
-			localStorage.setItem("todos", JSON.stringify([]));
-		else {
-			let localTodos = JSON.parse(localStorage.getItem("todos"));
-			setTodos(localTodos);
+		try {
+			if (localStorage.getItem("todos") === null)
+				localStorage.setItem("todos", JSON.stringify([]));
+			else {
+				let localTodos = JSON.parse(localStorage.getItem("todos"));
+				setTodos(localTodos);
+			}
+		} catch (error) {
+			console.error("Error getting todos from local storage: ", error);
 		}
 	};
 	const filterHandler = () => {
